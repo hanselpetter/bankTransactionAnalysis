@@ -1,4 +1,4 @@
-# Extraction and analysis of data in CSV files
+# Extraction & analysis of data in CSV files
 
 The mission of this project was to create summary reports from very large data sets (over a million lines) in CSV files, and then print those reports to text files. 
 
