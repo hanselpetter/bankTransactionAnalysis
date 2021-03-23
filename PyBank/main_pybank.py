@@ -26,6 +26,12 @@ with open(pybank_csv, newline='') as csvfile:
     # Loop through the data
     for row in pybank_reader:
 
+        # This next block loops through, and scans for greatest increase and greatest loss. It also calculates
+        # the change from one month to the next and records that change in a list that I will use later to 
+        # calculate average change. 
+
+        # Note that the next line below, "if profit_loss != 0:" is intended to skip these operations for the 
+        # first line of data, because there can be no comparison for change. 
         if profit_loss != 0:
             change = int(row[1]) - profit_loss
             
@@ -37,47 +43,28 @@ with open(pybank_csv, newline='') as csvfile:
                 greatest_loss = change
                 greatest_loss_month = row[0]
 
+            # Change values are appended to list here
             changes.append(change)
         
+        # This is the month counter
         if row[0] != month :
             month = row[0]
             total_months += 1
         
+        # This next block resets the profit_loss value, to compare with next time through the loop.
         profit_loss = int(row[1])
+
+        # And this keeps summing the profit-losses
         total_p_l += profit_loss
-        
+
+    # With the changes in a list, calculating average is easy with statistics.mean(). Note that I imported
+    # statistics at the beginning of this script with the other imports.   
     average_change = round(statistics.mean(changes), 2)  
     
+    # Finally, the print statements for the report:
     print ("Financial Analysis\n----------------------------")
     print(f"Total Months: {total_months}")
     print (f"Total: {total_p_l}")
     print(f"Average Change: {average_change}")
     print(f"Greatest Increase in profits: {greatest_inc_month} (${round(greatest_increase, 2)})" )
     print(f"Greatest Decrease in Profits: {greatest_loss_month} (${round(greatest_loss, 2)})" )
-        #print (row)
-        # Add title
-        #title.append(row[1])
-
-        # Add price
-        #price.append(row[4])
-
-        # Add number of subscribers
-        #subscribers.append(row[5])
-
-
-# Zip lists together
-##cleaned_csv = zip(title, price, subscribers, reviews, review_percent, length)
-
-# Set variable for output file
-#output_file = os.path.join("web_final.csv")
-
-#  Open the output file
-#with open(output_file, "w", newline="") as datafile:
-    #writer = csv.writer(datafile)
-
-    # Write the header row
-    #writer.writerow(["Title", "Course Price", "Subscribers", "Reviews Left",
-                     #"Percent of Reviews", "Length of Course"])
-
-    # Write in zipped rows
-    #writer.writerows(cleaned_csv)
