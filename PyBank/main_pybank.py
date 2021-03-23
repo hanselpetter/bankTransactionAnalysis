@@ -13,15 +13,13 @@ greatest_loss = 0
 profit_loss = 0
 total_p_l = 0
 
-
-
 # with open(pybank_csv, newline='', encoding='utf-8') as csvfile:
 with open(pybank_csv, newline='') as csvfile:
     pybank_reader = csv.reader(csvfile, delimiter=",")
 
     # Read the header
     csv_header = next(pybank_reader)
-    print(f"CSV Header: {csv_header}")
+    #print(f"CSV Header: {csv_header}")
 
     # Loop through the data
     for row in pybank_reader:
@@ -68,3 +66,20 @@ with open(pybank_csv, newline='') as csvfile:
     print(f"Average Change: {average_change}")
     print(f"Greatest Increase in profits: {greatest_inc_month} (${round(greatest_increase, 2)})" )
     print(f"Greatest Decrease in Profits: {greatest_loss_month} (${round(greatest_loss, 2)})" )
+
+# Finally, this last section is to print to a text file:
+
+# Set variable for output file
+output_file = os.path.join("Analysis", "analysis_pybank.txt")
+
+# Open the output file
+output_file = open(output_file, "w", newline="")
+
+# Print statements for the text file
+output_file.write("Financial Analysis\n----------------------------\n")
+output_file.write(f"Total Months: {total_months}\n")
+output_file.write(f"Total: ${total_p_l}\n")
+output_file.write(f"Average Change: ${average_change}\n")
+output_file.write(f"Greatest Increase in profits: {greatest_inc_month} (${round(greatest_increase, 2)})\n" )
+output_file.write(f"Greatest Decrease in Profits: {greatest_loss_month} (${round(greatest_loss, 2)})" )
+    
