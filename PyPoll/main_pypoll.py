@@ -13,7 +13,7 @@ with open(pypoll_csv, newline='') as csvfile:
 
     # Read the header
     csv_header = next(pypoll_reader)
-    print(f"CSV Header: {csv_header}")
+
 
     # Loop through the data
     for row in pypoll_reader:
