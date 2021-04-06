@@ -22,6 +22,7 @@ with open(pybank_csv, newline='') as csvfile:
     #print(f"CSV Header: {csv_header}")
 
     # Loop through the data
+    
     for row in pybank_reader:
 
         # This next block loops through, and scans for greatest increase and greatest loss. It also calculates
@@ -30,19 +31,19 @@ with open(pybank_csv, newline='') as csvfile:
 
         # Note that the next line below, "if profit_loss != 0:" is intended to skip these operations for the 
         # first line of data, because there can be no comparison for change. 
-        if profit_loss != 0:
-            change = int(row[1]) - profit_loss
-            
-            if change > greatest_increase :
-                greatest_increase = change
-                greatest_inc_month = row[0]
-            
-            if change < greatest_loss :
-                greatest_loss = change
-                greatest_loss_month = row[0]
+        
+        change = int(row[1]) - profit_loss
+        
+        if change > greatest_increase :
+            greatest_increase = change
+            greatest_inc_month = row[0]
+        
+        if change < greatest_loss :
+            greatest_loss = change
+            greatest_loss_month = row[0]
 
-            # Change values are appended to list here
-            changes.append(change)
+        # Change values are appended to list here
+        changes.append(change)
         
         # This is the month counter
         if row[0] != month :
